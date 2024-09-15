@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="menu-button">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div class="side-menu">
+            <div class="menu-title">Menu</div>
+            <ul>
+                <li><a href="phoneNumber.html">Kayıtlı Telefonlar</a></li>
+                <li><a href="term.html">Oda Sıcaklıkları</a></li>
+                <li><a href="raporlar.html">Raporlar</a></li>
+                <li><a href="ayarlar.html">Ayarlar</a></li>
+                <li><a href="loglar.html">Loglar</a></li>
+            </ul>
+            <a href="index.html" class="logout-btn">Çıkış Yap</a>
+        </div>
+        <div class="overlay"></div>
+    </header>
+    <div class="main-content">
+
+        <!-- Your main content here -->
+    </div>
+    <script>
+        const menuButton = document.querySelector('.menu-button');
+        const sideMenu = document.querySelector('.side-menu');
+        const overlay = document.querySelector('.overlay');
+
+        menuButton.addEventListener('click', () => {
+            menuButton.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            menuButton.classList.remove('active');
+            sideMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

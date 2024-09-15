@@ -1,0 +1,160 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    background: url('lnprojeeee.webp') no-repeat center center/cover;
+    position: relative;
+}
+
+/* Background Blur */
+.background-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    display: none;
+}
+
+/* Menu Button */
+.menu-button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.menu-button .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #e74c3c;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Menü başlangıçta gizli */
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Öğeleri dikeyde sıralar */
+    justify-content: space-between; /* Çıkış butonunu aşağı iter */
+    z-index: 10; /* Menünün üstte olmasını sağlar */
+}
+
+.side-menu .menu-title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.side-menu li {
+    margin: 20px 0;
+}
+
+.side-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: #444;
+    transition: background-color 0.3s ease;
+}
+
+.side-menu a:hover {
+    background-color: #555;
+}
+
+/* Logout Button */
+.logout-btn {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    background-color: #e74c3c;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Dark Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Karanlık arka plan */
+    opacity: 0;
+    visibility: hidden; /* Başlangıçta gizli */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 5; /* Menünün arkasında */
+}
+
+/* Active state for overlay */
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Menu Button active state */
+.menu-button.active + .side-menu {
+    left: 0; /* Menü görünür hale gelir */
+}
+
+.menu-button.active + .overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Menü aktifken içeriği kaydır */
+.menu-button.active ~ .main-content {
+    margin-left: 250px; /* Menü için boşluk bırakır */
+}

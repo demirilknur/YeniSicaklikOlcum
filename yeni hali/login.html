@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit" class="login-btn">Login</button>
+
+                <div class="extra-links">
+                    <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+                    <a href="signup.html" class="sign-up">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="login-btn">Log In</button>
+        <div class="dropdown-content">
+            <a href="./admin.html">Admin</a>
+            <a href="./kullanıcı.html">Kullanıcı</a>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle form submission and redirect -->
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();  // Prevent form from submitting the usual way
+
+            // Redirect to dashboard.html regardless of email/password
+            window.location.href = "dashboard.html";
+        });
+    </script>
+</body>
+</html>

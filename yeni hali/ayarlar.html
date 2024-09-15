@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Harici stil dosyanız -->
+</head>
+<body>
+
+    <!-- Menu Button -->
+    <div class="menu-button" id="menuButton">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <!-- Side Menu -->
+    <aside class="side-menu" id="sideMenu">
+        <div class="menu-title">Menu</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <a href="#" class="logout-btn">Logout</a>
+    </aside>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="form-container">
+                <h2>Account Settings</h2>
+                <div id="alertMessage" style="color: red;"></div> <!-- Alert div for error messages -->
+                
+                <!-- Settings Form -->
+                <form id="settingsForm">
+                    <label for="username">Change Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter new username" required>
+
+                    <label for="email">Change Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter new email" required>
+
+                    <label for="password">Change Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter new password" required>
+
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password" required>
+
+                    <button type="submit" class="submit-btn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // JavaScript for the menu functionality
+        const menuButton = document.getElementById('menuButton');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('overlay');
+
+        // Toggle the menu and overlay on button click
+        menuButton.addEventListener('click', function() {
+            menuButton.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside (on overlay)
+        overlay.addEventListener('click', function() {
+            menuButton.classList.remove('active');
+            sideMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Handle the form submission
+        const form = document.getElementById('settingsForm');
+        const alertMessage = document.getElementById('alertMessage');
+        
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent form from submitting
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Clear previous alert messages
+            alertMessage.innerHTML = "";
+
+            // Basic validation checks
+            if (username === "") {
+                alertMessage.innerHTML = "Username is required.";
+                return;
+            }
+            if (email === "") {
+                alertMessage.innerHTML = "Email is required.";
+                return;
+            }
+            if (password === "") {
+                alertMessage.innerHTML = "Password is required.";
+                return;
+            }
+            if (confirmPassword === "") {
+                alertMessage.innerHTML = "Please confirm your password.";
+                return;
+            }
+            if (password !== confirmPassword) {
+                alertMessage.innerHTML = "Passwords do not match!";
+                return;
+            }
+
+            // Simulate saving the data
+            alertMessage.style.color = "green";
+            alertMessage.innerHTML = `Settings saved successfully!<br>Username: ${username}<br>Email: ${email}`;
+        });
+    </script>
+</body>
+</html>

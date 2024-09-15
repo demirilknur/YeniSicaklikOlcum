@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation Section -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="Logo" class="logo-img">
+                <span>MEBRIC.IO</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="solution.html">Solutions</a></li>
+                    <li><a href="vision.html">Vision</a></li>
+                    <li><a href="#">Programs</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="nav-buttons">
+                <!-- Dropdown menu for login options -->
+                <div class="dropdown">
+                    <button class="login-btn">Log In</button>
+                    <div class="dropdown-content">
+                        <a href="./admin.html">Admin</a>
+                        <a href="./kullanıcı.html">Kullanıcı</a>
+                    </div>
+                </div>
+                <a href="#" class="get-started-btn">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The New Standard in Data Analysis</h1>
+            <p>Use Data to Get a 360-Degree View of Your Business</p>
+            <a href="solution.html" class="learn-more-btn">Learn More</a>
+        </div>
+    </section>
+
+    <style>
+        /* Styles for dropdown menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .login-btn {
+            background-color: #3e8e41;
+        }
+    </style>
+
+</body>y
+</html>
