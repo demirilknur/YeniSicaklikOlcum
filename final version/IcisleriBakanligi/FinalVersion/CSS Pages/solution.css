@@ -1,0 +1,109 @@
+/* Genel stil ayarları */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #e0e0e0;
+    background-color: #121212;
+    padding: 20px;
+    position: relative; /* Arka plan örtüsünün konumlandırılması için */
+}
+
+/* Arka plan örtüsü */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../PNG/lnprojeeee.webp');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(50%); /* Resmi koyulaştırmak için */
+    z-index: -1; /* İçeriğin arka planın üstünde kalmasını sağlar */
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #ffffff;
+}
+
+/* Ana sayfa butonu (Sol üst) */
+.top-left-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    z-index: 1000; /* Butonun her şeyin üstünde kalmasını sağlar */
+    transition: background-color 0.3s ease;
+}
+
+.top-left-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Main içerik alanı */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(30, 30, 30, 0.8); /* Koyu arka plan ve şeffaflık */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Section */
+section {
+    margin-bottom: 30px;
+}
+
+section h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+}
+
+section p {
+    margin-bottom: 15px;
+    color: #b0b0b0;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #e0e0e0;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #777;
+}
+
+footer p {
+    font-size: 0.9em;
+}
+
+
+
+.home-btn:hover {
+    background-color: #c0392b;
+}

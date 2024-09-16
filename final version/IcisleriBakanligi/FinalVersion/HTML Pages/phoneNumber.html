@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kişi Yönetimi</title>
+    <link rel="stylesheet" href="../CSS Pages/phoneNumber.css">
+</head>
+<body>
+    <div class="background-blur"></div>
+    <header>
+        <div class="menu-button" id="menuButton" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div>TELELON NUMARALARI</div>
+    </header>
+    <nav class="side-menu" id="sideMenu">
+        <div class="menu-title">Menü</div>
+        <ul>
+            <li><a href="phoneNumber.html">Kayıtlı Telefonlar</a></li>
+            <li><a href="term.html">Oda Sıcaklıkları</a></li>
+            <li><a href="raporlar.html">Raporlar</a></li>
+            <li><a href="ayarlar.html">Ayarlar</a></li>
+            <li><a href="loglar.html">Loglar</a></li>
+        </ul>
+        <a href="index.html" class="logout-btn">Çıkış Yap</a>
+    </nav>
+
+    <div class="content-container">
+        <h2>Kayıtlı Olan Telefonlar</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ad Soyad</th>
+                    <th>Telefon Numarası</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody id="phone-list">
+                <!-- Telefon bilgilerini düzenlemek için boş satır -->
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button id="add-phone-btn" onclick="checkBeforeAdd()">Yeni Numara Ekle</button>
+        </div>
+    </div>
+
+    <script>
+        // Menü açma/kapama işlevi
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            const menuButton = document.getElementById('menuButton');
+            menu.classList.toggle('open');
+            menuButton.classList.toggle('active');
+        }
+
+
+        // Yeni telefon numarası ekleme işlevi
+       // Yeni telefon numarası ekleme işlevi
+function addNewPhone() {
+    const phoneList = document.getElementById('phone-list');
+    const newRow = document.createElement('tr');
+
+    newRow.innerHTML = `
+        <td><input type="text" placeholder="Ad Soyad" required></td>
+        <td><input type="text" placeholder="05xxxxxxxxx" oninput="validatePhoneNumber(this)" required></td>
+        <td class="actions">
+            <button class="save" onclick="saveRow(this)">Kaydet</button>
+            <button class="delete" onclick="deleteRow(this)">Sil</button>
+        </td>
+    `;
+    phoneList.appendChild(newRow);
+}
+
+// Yeni numara eklemeden önce boş alan ve telefon numarası kontrolü
+function checkBeforeAdd() {
+    const phoneList = document.getElementById('phone-list');
+    const lastRow = phoneList.querySelector('tr:last-child');  // Son eklenen satırı al
+    const inputs = lastRow ? lastRow.querySelectorAll('input') : null;
+
+    // Eğer mevcut bir satır varsa ve boş ise kullanıcıyı uyar
+    if (inputs) {
+        for (let i = 0; i < inputs.length; i++) {
+            if (!inputs[i].value.trim()) {
+                alert("Lütfen mevcut numarayı kaydedin.");
+                return;
+            }
+        }
+
+        // Telefon numarası doğrulama
+        if (!validatePhoneNumber(inputs[1])) {
+            alert("Lütfen geçerli bir telefon numarası girin."); // Uyarı mesajı
+            return; // Eğer geçersizse yeni satır eklenmeyecek
+        }
+    }
+
+    // Mevcut satırdaki bilgiler geçerliyse yeni satır ekle
+    addNewPhone();
+}
+
+// Satır silme işlevi
+function deleteRow(button) {
+    const row = button.closest('tr');
+    const confirmDelete = confirm("Silmek istediğinize emin misiniz?");
+    
+    if (confirmDelete) {
+        row.remove();
+        alert("Telefon numarası silindi.");
+    }
+}
+
+// Satır düzenleme/kaydetme işlevi
+function editRow(button) {
+    const row = button.closest('tr');
+    const inputs = row.querySelectorAll('input');
+
+    if (button.textContent === "Düzenle") {
+        inputs.forEach(input => input.removeAttribute('disabled'));
+        button.textContent = "Kaydet";
+    } else {
+        // Boş alan kontrolü
+        if (Array.from(inputs).some(input => !input.value.trim())) {
+            alert("Lütfen tüm alanları doldurunuz.");
+        } else {
+            // Telefon numarası doğrulama
+            if (!validatePhoneNumber(inputs[1])) {
+                return; // Geçersizse kaydetme yapılmayacak
+            }
+
+            inputs.forEach(input => input.setAttribute('disabled', 'disabled'));
+            button.textContent = "Düzenle";
+            alert("Değişiklikler kaydedildi.");
+        }
+    }
+}
+
+// Satırı kaydetme işlevi (Kaydet butonuna tıklandığında çalışır)
+function saveRow(button) {
+    const row = button.closest('tr');
+    const inputs = row.querySelectorAll('input');
+
+    // Boş alan kontrolü
+    if (Array.from(inputs).some(input => !input.value.trim())) {
+        alert("Lütfen tüm alanları doldurunuz.");
+        return;
+    }
+
+    // Telefon numarası doğrulama
+    if (!validatePhoneNumber(inputs[1])) {
+        return; // Geçersizse kaydetme yapılmayacak
+    }
+
+    // Satırı kaydettikten sonra butonları değiştirme
+    inputs.forEach(input => input.setAttribute('disabled', 'disabled'));
+    button.textContent = "Düzenle";
+    button.setAttribute('onclick', 'editRow(this)');
+    alert("Kayıt başarıyla yapıldı.");
+}
+
+// Telefon numarası doğrulama işlevi (05 ile başlamalı)
+function validatePhoneNumber(input) {
+    const phoneNumberPattern = /^05\d{9}$/; // 05 ile başlayan ve 11 haneli olmalı
+
+    if (!phoneNumberPattern.test(input.value)) {
+        input.setCustomValidity("Telefon numarası 05 ile başlamalı ve toplam 11 haneli olmalıdır.");
+        input.reportValidity(); // Hata mesajını göster
+        return false;
+    } else {
+        input.setCustomValidity(""); // Geçerliyse hata mesajını temizle
+        return true;
+    }
+}
+function formatPhoneNumber(phoneNumber) {
+    // Eğer numara 05 ile başlıyorsa, +90 formatına dönüştür
+    if (phoneNumber.startsWith("05")) {
+        return "+90" + phoneNumber.slice(1);
+    }
+    return phoneNumber;
+}
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oda Sıcaklıklarını Düzenle</title>
+    <link rel="stylesheet" href="../CSS Pages/phoneNumber.css">
+</head>
+<body>
+    <div class="background-blur"></div>
+    <header>
+        <div class="menu-button" id="menuButton" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div>ODA SICAKLIKLARI</div>
+    </header>
+    <nav class="side-menu" id="sideMenu">
+        <div class="menu-title">Menu</div>
+        <ul>
+            <li><a href="phoneNumber.html">Kayıtlı Telefonlar</a></li>
+            <li><a href="term.html">Oda Sıcaklıkları</a></li>
+            <li><a href="raporlar.html">Raporlar</a></li>
+            <li><a href="ayarlar.html">Ayarlar</a></li>
+            <li><a href="loglar.html">Loglar</a></li>
+        </ul>
+        <a href="index.html" class="logout-btn">Çıkış Yap</a>
+    </nav>
+    <div class="content-container">
+        <h2>Oda Sıcaklıklarını Düzenle</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Oda Numarası</th>
+                    <th>Mevcut Sıcaklık</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody id="room-list">
+                <!-- Oda sıcaklık bilgilerini düzenlemek için boş satır -->
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button onclick="addNewRoom()">Yeni Oda Ekle</button>
+        </div>
+    </div>
+
+    <script>
+        // Menü açma/kapama işlevi
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            const menuButton = document.getElementById('menuButton');
+            menu.classList.toggle('open');
+            menuButton.classList.toggle('active');
+        }
+
+        let editingRow = null; // Düzenlenen satırı takip etmek için değişken
+
+        // Yeni oda ekleme işlevi
+        function addNewRoom() {
+            if (editingRow !== null) {
+                alert("Lütfen mevcut satırı kaydedin veya iptal edin.");
+                return;
+            }
+
+            const roomList = document.getElementById('room-list');
+            const newRow = document.createElement('tr');
+
+            newRow.innerHTML = `
+                <td><input type="text" placeholder="Oda Numarası" required></td>
+                <td><input type="number" placeholder="-50 ile 20 arası" oninput="validateTemperature(this)" required></td>
+                <td class="actions">
+                    <button class="save" onclick="saveRow(this)">Kaydet</button>
+                </td>
+            `;
+            roomList.appendChild(newRow);
+            editingRow = newRow; // Yeni satır düzenleniyor olarak ayarlanır
+        }
+
+        // Sıcaklık doğrulama işlevi
+        function validateTemperature(input) {
+            const value = parseFloat(input.value);
+            if (isNaN(value) || value < -50 || value > 20) {
+                input.setCustomValidity("Sıcaklık -50 ile 20 arasında olmalıdır.");
+                input.reportValidity(); // Hata mesajını göster
+            } else {
+                input.setCustomValidity(""); // Geçerli ise hata mesajını temizle
+            }
+        }
+
+        // Satır kaydetme işlevi
+        function saveRow(button) {
+            const row = button.closest('tr');
+            const inputs = row.querySelectorAll('input');
+
+            const tempInput = row.querySelector('input[placeholder="-50 ile 20 arası"]');
+            if (!tempInput.checkValidity()) {
+                alert(tempInput.validationMessage);
+                return;
+            }
+
+            inputs.forEach(input => input.setAttribute('disabled', 'disabled'));
+            button.textContent = "Düzenle";
+            button.onclick = function() { editRow(button); }; // Kaydet butonunu düzenleye çevir
+
+            // Ekleme işlemi yapıldıktan sonra düzenleme ve silme butonları ekleyin
+            const actionsCell = row.querySelector('.actions');
+            actionsCell.innerHTML += `
+                <button class="delete" onclick="deleteRow(this)">Sil</button>
+            `;
+
+            editingRow = null; // Düzenlenen satır yok
+        }
+
+        // Satırı düzenleme işlevi
+        function editRow(button) {
+            if (editingRow !== null) {
+                alert("Lütfen önce mevcut satırı kaydedin.");
+                return;
+            }
+
+            const row = button.closest('tr');
+            const inputs = row.querySelectorAll('input');
+            inputs.forEach(input => input.removeAttribute('disabled'));
+            button.textContent = "Kaydet";
+            button.onclick = function() { saveRow(button); }; // Düzenle butonunu kaydet olarak değiştir
+            editingRow = row; // Düzenlenmekte olan satırı takip et
+        }
+
+        // Satır silme işlevi
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            const confirmDelete = confirm("Bu oda bilgisini silmek istediğinize emin misiniz?");
+            if (confirmDelete) {
+                row.remove();
+                editingRow = null; // Eğer silinen satır düzenleniyorsa, sıfırla
+                alert("Oda bilgisi başarıyla silindi.");
+            }
+        }
+    </script>
+</body>
+</html>

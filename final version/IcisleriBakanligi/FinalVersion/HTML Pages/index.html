@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veri Analiz Sayfası</title>
+    <link rel="stylesheet" href="../CSS Pages/styles.css">
+    <script>
+        function scrollToSection(sectionId) {
+            const section = document.querySelector(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Navigation Section -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="../PNG/logo.png" alt="Logo" class="logo-img">
+                <span>MEBRIC.IO</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="solution.html">Çözümler</a></li>
+                    <li><a href="vision.html">Vizyon</a></li>
+                </ul>
+            </nav>
+            <div class="nav-buttons">
+                <div class="dropdown">
+                    <button class="dropdown-btn">Giriş Yap</button>
+                    <div class="dropdown-content">
+                        <a href="adminGiris.html">Yönetici</a>
+                        <a href="login.html">Kullanıcı</a>
+                    </div>
+                </div>
+                <a href="#" class="get-started-btn" onclick="scrollToSection('#contact-info')">Başlayın</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Veri Analizinde Yeni Standart</h1>
+            <p>360 Derecelik Bir Bakış için Verileri Kullanın</p>
+            <a href="#" class="learn-more-btn" onclick="scrollToSection('.info-section')">Daha Fazla Bilgi Edin</a>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section">
+        <div class="info-container">
+            <div class="info-text">
+                <h2>Sıcaklık Takip ve Bildirim Sistemi 🌡️</h2>
+                <p>Kritik alanlarınızın güvenliği için geliştirdiğimiz bu sistemle sıcaklık kontrolünü her yerde kolayca sağlayabilirsiniz!</p>
+                <ul>
+                    <li>🔹 Anlık sıcaklık takibi</li>
+                    <li>🔹 Veri yönetimi</li>
+                    <li>🔹 Kritik durumlarda anında bildirim</li>
+                </ul>
+                <p>💡 <strong>Neden Önemli?</strong> Ortamların sıcaklığını sürekli izleyerek, olası arızalarda hızlıca müdahale edebilir, güvenliği ve verimliliği artırabilirsiniz.</p>
+                <p><strong>Altyapınızı koruyun, her alanda kesintisiz güvenlik sağlayın!</strong></p>
+
+            </div>
+            <img src="../PNG/projectttt.jpeg" alt="Project Image" class="info-img">
+        </div>
+    </section>
+
+    <!-- Additional Information Section -->
+    <section class="bottom-content">
+        <h3>Çözümlerimiz Hakkında Bilgi Edinin</h3>
+        <p>Kapsamlı çözümlerimiz ve bunların işletmenize nasıl fayda sağlayabileceği hakkında daha fazla bilgi edinmek için Çözümler Sayfamızı ziyaret edin . <a href="solutions.html">Solutions Page</a>.</p>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section id="contact-info" class="contact-info">
+        <div class="contact-container">
+            <h2>Bize Ulaşın</h2>
+            <p>Herhangi bir sorunuz varsa bizimle iletişime geçmekten çekinmeyin:</p>
+            <ul>
+                <li>E-mail: contact@mebric.io</li>
+                <li>Telefon: +90 123 456 7890</li>
+                <li>Adres: Mutlukent mah., 1986 cad., No: 8, Çankaya/Ankara, Türkiye</li>
+            </ul>
+        </div>
+    </section>
+
+</body>
+</html>

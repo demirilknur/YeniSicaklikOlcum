@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayarlar</title>
+    <link rel="stylesheet" href="../CSS Pages/ayarlar.css">
+</head>
+<body>
+    <div class="background-blur"></div>
+    <header>
+        <div class="menu-button">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div>AYARLAR</div>
+    </header>
+    <nav class="side-menu">
+        <div class="menu-title">Menü</div>
+        <ul>
+            <li><a href="phoneNumber.html">Kayıtlı Telefonlar</a></li>
+            <li><a href="term.html">Oda Sıcaklıkları</a></li>
+            <li><a href="raporlar.html">Raporlar</a></li>
+            <li><a href="ayarlar.html">Ayarlar</a></li>
+            <li><a href="loglar.html">Loglar</a></li>
+        </ul>
+        <a href="index.html" class="logout-btn">Çıkış Yap</a>
+    </nav>
+    <main class="main-content">
+        <h1>Ayarlar</h1>
+        <div class="form-container">
+            <!-- Buttons to Select Information to Update -->
+            <div>
+                <button id="update-username-btn">Kullanıcı Adını Güncelle</button>
+                <button id="update-email-btn">E-mail Adresini Güncelle</button>
+                <button id="update-password-btn">Şifreni Güncelle</button>
+            </div>
+
+            <!-- Username Update Section -->
+            <div id="username-section" class="form-section">
+                <form id="username-form" action="#" method="post">
+                    <label for="new-username">Yeni Kullanıcı Adı:</label>
+                    <input type="text" id="new-username" name="username" placeholder="Enter your new username">
+                    <input type="submit" value="Save Username">
+                </form>
+            </div>
+
+            <!-- Email Update Section -->
+            <div id="email-section" class="form-section">
+                <form id="email-form" action="#" method="post">
+                    <label for="new-email">Yeni E-mail:</label>
+                    <input type="email" id="new-email" name="email" placeholder="Enter your new email">
+                    <input type="submit" value="Save Email">
+                </form>
+            </div>
+
+            <!-- Password Update Section -->
+            <div id="password-section" class="form-section">
+                <form id="password-form" action="#" method="post">
+                    <label for="new-password">Yeni Şifre:</label>
+                    <input type="password" id="new-password" name="password" placeholder="Enter your new password">
+                    <input type="submit" value="Save Password">
+                </form>
+            </div>
+        </div>
+    </main>
+    <div class="overlay"></div>
+    <script>
+        const menuButton = document.querySelector('.menu-button');
+        const sideMenu = document.querySelector('.side-menu');
+        const updateUsernameBtn = document.getElementById('update-username-btn');
+        const updateEmailBtn = document.getElementById('update-email-btn');
+        const updatePasswordBtn = document.getElementById('update-password-btn');
+        const usernameSection = document.getElementById('username-section');
+        const emailSection = document.getElementById('email-section');
+        const passwordSection = document.getElementById('password-section');
+        const overlay = document.querySelector('.overlay');
+
+        menuButton.addEventListener('click', () => {
+            sideMenu.classList.toggle('active');
+            menuButton.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        updateUsernameBtn.addEventListener('click', () => {
+            usernameSection.classList.add('active');
+            emailSection.classList.remove('active');
+            passwordSection.classList.remove('active');
+        });
+
+        updateEmailBtn.addEventListener('click', () => {
+            emailSection.classList.add('active');
+            usernameSection.classList.remove('active');
+            passwordSection.classList.remove('active');
+        });
+
+        updatePasswordBtn.addEventListener('click', () => {
+            passwordSection.classList.add('active');
+            usernameSection.classList.remove('active');
+            emailSection.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
